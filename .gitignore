@@ -1,0 +1,36 @@
+
+
+*.class
+
+*.log
+*.lock
+*.txt
+
+
+target/
+
+# idea
+.idea/
+*.iml
+
+### IntelliJ IDEA ###
+*.iml
+*.ipr
+*.iws
+.idea
+.classpath
+.project
+.settings/
+bin/
+
+*.log
+tmp/
+
+
+*.zip
+*.class
+*.exe
+*.project
+*.jar
+*.txt
+
