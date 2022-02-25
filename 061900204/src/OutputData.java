@@ -8,6 +8,20 @@ public class OutputData {
     String outputFile;
 
 
+
+
+
+
+// 奖牌榜
+// https://api.cntv.cn/olympic/getBjOlyMedals?serviceId=2022dongao&itemcode=GEN-------------------------------&t=jsonp&cb=omedals1
+// 赛程表(20220212改为需要的日期)
+// https://api.cntv.cn/Olympic/getBjOlyMatchList?startdatecn=20220212&t=jsonp&cb=OM&serviceId=2022dongao
+
+
+
+
+
+
     //如果输出失败重新爬取一遍到文件后再输出
     public void outputTotal()
     {
@@ -45,14 +59,13 @@ public class OutputData {
                     //getTotal函数在爬取成功后返回true在爬取失败后返回false
                     if(!getData.getTotal()){
                         System.out.println("爬取数据失败");
-                        System.exit(0);
                     }
                 }
 
                 outputTotal();
 
 
-            }else if (s.substring(0,8).equals("schedule")&&s.length()==13){
+            }else if (s.length()==13&&s.substring(0,8).equals("schedule")){
                 String date=s.substring(9,13);
 
 
@@ -63,13 +76,16 @@ public class OutputData {
                         //getData函数在爬取成功后返回true在爬取失败后返回false
                         if(!getData.getSchedule(date)){
                             System.out.println("爬取数据失败");
-                            System.exit(0);
                         }
                     }
 
                     outputScedule(date);
+                }else {
+                    System.out.println("N/A");
                 }
 
+            }else {
+                System.out.println("Error");
             }
 
 
