@@ -1,33 +1,41 @@
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
 public class OlympicSearch {
 
-
-    //检查是否已经爬取数据文件到data文件夹中
-    public static boolean dataExist()
-    {
-        return true;
-    }
-
-
-    public static void search(String inputFile,String outputFile)
-    {
-
-    }
-
     public static void main(String[] args) {
-        if(args.length!=2)
-        {
+        if(args.length!=2) {
             System.out.println("运行格式异常，正确格式需要加上输入文件和输出文件");
             return;
         }
-        else
-        {
-            //先检查数据是否已经爬取
-            if(dataExist())
-            {
-                search(args[0],args[1]);
-            }
 
+        ArrayList<String> requestType =new ArrayList<>();
+        //按行读取input文件内容
+        try {
+            FileInputStream inputStream = new FileInputStream("input.txt");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String str;
+            while((str = bufferedReader.readLine()) != null)
+            {
+                requestType.add(str);
+            }
+            //close
+            inputStream.close();
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("未找到该文件");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("IO异常");
         }
+
+        new OutputData(requestType,args[1]);
 
 
 
