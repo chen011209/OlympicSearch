@@ -17,9 +17,9 @@ public class OutputData {
     public void outputTotal()
     {
 
-        Gson gson = new Gson();
 
-        //按行读取input文件内容
+
+        //读取total.json文件
         StringBuilder fileString=new StringBuilder();
         try {
             FileInputStream inputStream = new FileInputStream("data/total.json");
@@ -41,29 +41,68 @@ public class OutputData {
             System.out.println("IO异常");
         }
 
-
-
-
+        Gson gson = new Gson();
         String jsonString =fileString.toString();
 
-        totalFile tf = gson.fromJson(jsonString, totalFile.class);
+        String outString = null;
+        try{
+            totalFile tf = gson.fromJson(jsonString, totalFile.class);
+            outString=tf.data.getListByRank();
 
-        System.out.println(tf.data.medalsList[0].countryid);
+
+
+
+        }catch (Exception e){
+
+            //解析文件夹中的json文件失败后需要重新爬取json文件
+            if(!getData.getFile("total")){
+                System.out.println("json文件损坏，并且爬取数据失败");
+            }
+            else {
+                System.out.println("json文件损坏,已经重新爬取文件");
+
+
+
+                //重新读取total.json文件
+                fileString=new StringBuilder();
+                try {
+                    FileInputStream inputStream = new FileInputStream("data/total.json");
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    String str;
+
+                    while((str = bufferedReader.readLine()) != null)
+                    {
+                        fileString.append(str);
+                    }
+                    //close
+                    inputStream.close();
+                    bufferedReader.close();
+                } catch (FileNotFoundException e2) {
+                    e2.printStackTrace();
+                    System.out.println("未找到该文件");
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                    System.out.println("IO异常");
+                }
+
+
+                jsonString=fileString.toString();
+
+                totalFile tf = gson.fromJson(jsonString, totalFile.class);
+                outString=tf.data.getListByRank();
+            }
+        }
+
 
 
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter(outputFile));
-            out.write("hello");
+            out.write(outString);
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
-
-
-        //可以使用json文件输出了
-        //之后需要写解析json失败后重新获取文件
 
 
     }
@@ -96,7 +135,7 @@ public class OutputData {
 
                 //文件夹中不存在total.json文件则爬取数据,isFileExist函数中创建对应文件
                 if(!isFileExist("data/total.json")){
-                    //getTotal函数在爬取成功后返回true在爬取失败后返回false
+                    //getData函数在爬取成功后返回true在爬取失败后返回false
                     if(!getData.getFile("total")){
                         System.out.println("爬取数据失败");
                     }
