@@ -1,8 +1,7 @@
-package bean;
+package bean.medal;
 
-public class CountryMedal {
+public class medalItem {
     public String countryid;
-    public String countryname;
     public int gold;
     public int silver;
     public int bronze;

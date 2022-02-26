@@ -1,9 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 
-
 public class OlympicSearch {
-
     public static void main(String[] args) {
         if(args.length!=2) {
             System.out.println("运行格式异常，正确格式需要加上输入文件和输出文件");
@@ -32,8 +30,6 @@ public class OlympicSearch {
         }
 
         new OutputData(requestType,args[1]);
-
-
 
     }
 
