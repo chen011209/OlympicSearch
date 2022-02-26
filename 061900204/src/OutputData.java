@@ -1,9 +1,12 @@
-import java.io.File;
-import java.io.IOException;
+import bean.totalFile;
+import com.google.gson.Gson;
+import test.User;
+
+import java.io.*;
 import java.util.ArrayList;
 
 
-//该类输出数据到输出文件中
+//该类根据输入文件输出对应的数据到输出文件中
 public class OutputData {
     String outputFile;
 
@@ -13,7 +16,56 @@ public class OutputData {
     //如果输出失败重新爬取一遍到文件后再输出
     public void outputTotal()
     {
-        System.out.println("ok");
+
+        Gson gson = new Gson();
+
+        //按行读取input文件内容
+        StringBuilder fileString=new StringBuilder();
+        try {
+            FileInputStream inputStream = new FileInputStream("data/total.json");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String str;
+
+            while((str = bufferedReader.readLine()) != null)
+            {
+                fileString.append(str);
+            }
+            //close
+            inputStream.close();
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("未找到该文件");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("IO异常");
+        }
+
+
+
+
+        String jsonString =fileString.toString();
+
+        totalFile tf = gson.fromJson(jsonString, totalFile.class);
+
+        System.out.println(tf.data.medalsList[0].countryid);
+
+
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(outputFile));
+            out.write("hello");
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        //可以使用json文件输出了
+        //之后需要写解析json失败后重新获取文件
+
+
     }
 
 
