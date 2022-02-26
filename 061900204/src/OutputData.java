@@ -10,18 +10,6 @@ public class OutputData {
 
 
 
-
-
-// 奖牌榜
-// https://api.cntv.cn/olympic/getBjOlyMedals?serviceId=2022dongao&itemcode=GEN-------------------------------&t=jsonp&cb=omedals1
-// 赛程表(20220212改为需要的日期)
-// https://api.cntv.cn/Olympic/getBjOlyMatchList?startdatecn=20220212&t=jsonp&cb=OM&serviceId=2022dongao
-
-
-
-
-
-
     //如果输出失败重新爬取一遍到文件后再输出
     public void outputTotal()
     {
@@ -54,10 +42,10 @@ public class OutputData {
         {
             if(s.equals("total")) {
 
-                //文件夹中不存在total.json文件则爬取数据
+                //文件夹中不存在total.json文件则爬取数据,isFileExist函数中创建对应文件
                 if(!isFileExist("data/total.json")){
                     //getTotal函数在爬取成功后返回true在爬取失败后返回false
-                    if(!getData.getTotal()){
+                    if(!getData.getFile("total")){
                         System.out.println("爬取数据失败");
                     }
                 }
@@ -72,9 +60,9 @@ public class OutputData {
                 //冬奥会时间为2月4日到2月20日
                 if(204<=Integer.parseInt(date)&&Integer.parseInt(date)<=220)
                 {
-                    if(!isFileExist("data/schedule/"+s.substring(9,13))){
+                    if(!isFileExist("data/schedule/"+s.substring(9,13)+".json")){
                         //getData函数在爬取成功后返回true在爬取失败后返回false
-                        if(!getData.getSchedule(date)){
+                        if(!getData.getFile(date)){
                             System.out.println("爬取数据失败");
                         }
                     }
