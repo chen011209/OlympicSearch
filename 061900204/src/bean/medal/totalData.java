@@ -6,15 +6,12 @@ public class totalData {
 
     public String getListByRank()
     {
-
         StringBuilder s=new StringBuilder();
 
         for (medalItem item:medalsList) {
-            s.append("rank"+item.rank+":"+item.countryid+"\ngold:"+item.gold+"\nsilver:"+item.silver+"\nbronze:"+item.bronze+"\ntotal:"+item.count+"\n-----\n");
+            s.append("rank").append(item.rank).append(':').append(item.countryid).append("\ngold:").append(item.gold).append("\nsilver:").append(item.silver).append("\nbronze:").append(item.bronze).append("\ntotal:").append(item.count).append("\n-----\n");
 
         }
-
-
         return s.toString();
     }
 }

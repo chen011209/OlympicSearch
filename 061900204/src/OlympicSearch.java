@@ -11,7 +11,7 @@ public class OlympicSearch {
         ArrayList<String> requestType =new ArrayList<>();
         //按行读取input文件内容
         try {
-            FileInputStream inputStream = new FileInputStream("input.txt");
+            FileInputStream inputStream = new FileInputStream(args[0]);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String str;
             while((str = bufferedReader.readLine()) != null)

@@ -1,12 +1,8 @@
 package bean.schedule;
 
-
-
-
 public class scheduleData {
     public matchItem[] matchList;
     public int total;
-
 
     public String getSchedule()
     {
@@ -26,8 +22,7 @@ public class scheduleData {
 
             len=item.startdatecn.length();
             time=item.startdatecn.substring(len-8,len-3);
-            s.append("time:"+time+"\nsport:"+item.itemcodename+"\nname:"
-                    +item.title+matchCountry+"\nvenue:"+item.venuename+"\n-----\n");
+            s.append("time:").append(time).append("\nsport:").append(item.itemcodename).append("\nname:").append(item.title).append(matchCountry).append("\nvenue:").append(item.venuename).append("\n-----\n");
 
         }
 

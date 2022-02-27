@@ -35,7 +35,7 @@ public class OutputData {
             }
         }
 
-      file.writeFile(outputFile,outString);
+        file.writeFile(outputFile,outString);
     }
 
 
@@ -75,6 +75,7 @@ public class OutputData {
 
         //判断data文件夹是否存在,不存在则创建文件夹
         isFolderExist("data");
+        isFolderExist("data/schedule");
 
         for (String s:requestType)
         {
@@ -90,7 +91,7 @@ public class OutputData {
 
                 outputTotal();
 
-            }else if (s.length()==13&&s.substring(0,8).equals("schedule")){
+            }else if (s.length()==13&& s.startsWith("schedule")){
                 String date=s.substring(9,13);
 
                 //冬奥会时间为2月2日到2月20日
@@ -119,8 +120,3 @@ public class OutputData {
 }
 
 
-
-//OlympicSearch.java
-//javac OlympicSearch.java
-//javac -encoding UTF-8 OlympicSearch.java
-//java OlympicSearch input.txt output.txt
