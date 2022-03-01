@@ -6,11 +6,6 @@ public class OlympicSearch {
 
         long startTime=System.currentTimeMillis(); //获取开始时间
 
-
-
-        //去掉文件末尾的换行
-        //多种输入文件格式
-
         //性能
         //改进前
         //4000 平均3000ms
@@ -51,14 +46,14 @@ public class OlympicSearch {
             System.out.println("IO异常");
         }
 
-        new OutputData(requestType,args[1]);
-
+        OutputData out=new OutputData(requestType);
+        out.outPutToFile(args[1]);
 
 
 
         long endTime=System.currentTimeMillis(); //获取结束时间
 
-        System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
+        System.out.println((endTime-startTime));
 
 
     }

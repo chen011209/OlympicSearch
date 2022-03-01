@@ -16,7 +16,7 @@ public class scheduleData {
         for (matchItem item:matchList) {
 
             if(item.homename.length()==0)
-                matchCountry=" ";
+                matchCountry="";
             else
                 matchCountry=" "+item.homename+"VS"+item.awayname;
 

@@ -1,4 +1,4 @@
-package HTTP;
+package util;
 
 
 import java.io.BufferedReader;

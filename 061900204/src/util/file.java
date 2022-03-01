@@ -34,13 +34,13 @@ public class file {
 
 
     //writeFile为追加模式
-    public static void writeFile(String filePath,String content)
+    public static void writeFile(String filePath,String content,boolean append)
     {
 
 
 
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter(filePath,true));
+            BufferedWriter out = new BufferedWriter(new FileWriter(filePath,append));
 
             out.write(content);
             out.close();
