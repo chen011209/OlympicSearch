@@ -2,7 +2,6 @@ package util;
 
 import java.io.*;
 
-
 //该类作用 读取文件 输出内容到文件 检查文件或文件夹是否存在 不存在则创建
 public class file {
     public static String readFile(String filePath)
@@ -11,11 +10,10 @@ public class file {
         StringBuilder fileString=new StringBuilder();
         try {
             FileInputStream inputStream = new FileInputStream(filePath);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"));
             String str;
 
-            while((str = bufferedReader.readLine()) != null)
-            {
+            while((str = bufferedReader.readLine()) != null) {
                 fileString.append(str);
             }
             //close
@@ -33,23 +31,19 @@ public class file {
     }
 
 
-    //writeFile为追加模式
     public static void writeFile(String filePath,String content,boolean append)
     {
-
-
-
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter(filePath,append));
+            FileOutputStream outputStream=new FileOutputStream(filePath,append);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
             out.write(content);
             out.close();
+            outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 
 
     //检查文件是否存在，如果不存在则创建文件并返回false
@@ -61,13 +55,10 @@ public class file {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             return false;
-
         } else {
             return true;
         }
-
     }
 
     public static boolean isFolderExist(String folderName)
@@ -82,7 +73,6 @@ public class file {
             return true;
         }
     }
-
 
 }
 

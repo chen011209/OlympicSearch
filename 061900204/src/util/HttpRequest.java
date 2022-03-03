@@ -1,14 +1,11 @@
 package util;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-
 
 //该类用于HTTP连接 并且得到连接的文件字符串
 public class HttpRequest {
@@ -24,8 +21,6 @@ public class HttpRequest {
 // https://api.cntv.cn/olympic/getBjOlyMedals?serviceId=2022dongao&itemcode=GEN-------------------------------&t=jsonp&cb=omedals1
 // 赛程表(2022****改为需要的日期)
 // https://api.cntv.cn/Olympic/getBjOlyMatchList?startdatecn=2022****&t=jsonp&cb=OM&serviceId=2022dongao
-
-
 
 
 
@@ -48,14 +43,12 @@ public class HttpRequest {
 
     }
 
-
     //返回文件内容的字符串
     public String getFileString() throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setConnectTimeout(TIMEOUT);
         connection.setReadTimeout(TIMEOUT);
-
 
         if (connection.getResponseCode() != 200) {
             System.out.println("连接失败,返回码为"+connection.getResponseCode());
@@ -65,7 +58,6 @@ public class HttpRequest {
         //buffer用于接收url的缓冲 builder用于生成网址内容的字符串
         BufferedReader buffer = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         StringBuilder builder = new StringBuilder();
-
 
         String s;
         while ((s = buffer.readLine()) != null) {

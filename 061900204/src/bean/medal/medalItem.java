@@ -7,5 +7,4 @@ public class medalItem {
     public int bronze;
     public int count;
     public int rank;
-
 }

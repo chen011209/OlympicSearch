@@ -90,8 +90,8 @@ public class OutputData {
     {
 
         this.requestType=requestType;
-        fileString[20]="N/A\n----\n";
-        fileString[21]="Error\n----\n";
+        fileString[20]="N/A\n-----\n";
+        fileString[21]="Error\n-----\n";
 
         //判断data文件夹是否存在,不存在则创建文件夹
         isFolderExist("data");
@@ -107,6 +107,11 @@ public class OutputData {
         this.outputFile=outputFile;
 
         for (String s:requestType) {
+            //忽略空行
+            if(s.length()==0)
+                continue;
+
+
             String[] sArray = s.split("\\s+"); //分割一个或者多个空格
 
             //第一个可能是空字符串
@@ -130,7 +135,12 @@ public class OutputData {
                 outputCode.add(0);
 
 
-            }else if (sArray.length==2&&sArray[0].equals("schedule")){
+            }else if (sArray[0].equals("schedule")){
+                if(sArray.length!=2){
+                    outputCode.add(20);
+                    continue;
+                }
+
                 String date=sArray[1];
                 //冬奥会时间为2月2日到2月20日
                 //第一个判断字符串是否是数字
@@ -148,10 +158,13 @@ public class OutputData {
                         isOut[dateInt-201]=true;
                     }
                     outputCode.add(dateInt-201);
+
+                    //输出N/A
                 }else {
                     outputCode.add(20);
                 }
 
+                //输出Error
             }else {
                 outputCode.add(21);
 
@@ -164,7 +177,7 @@ public class OutputData {
         }
         //删除末尾的换行
         s.deleteCharAt(s.length()-1);
-        s.deleteCharAt(s.length()-1);
+
 
 
         //到此 s为需要输出的字符串 之后可以根据需要输出到文件或者其他地方
